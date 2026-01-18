@@ -346,13 +346,13 @@ export default function StockGrid() {
                                                         decoding="async"
                                                         onError={(e) => {
                                                             e.target.onerror = null;
-                                                            e.target.src = '/logo-rect.png';
+                                                            e.target.src = '/logo_nuevo_rect_png.png';
                                                         }}
                                                     />
                                                 </picture>
                                             ) : (
                                                 <div className="flex flex-col items-center justify-center gap-3 text-slate-300">
-                                                    <span className="text-2xl font-black tracking-tighter text-slate-400">NAVARRO</span>
+                                                    <span className="text-2xl font-black tracking-tighter text-slate-400">AUTOMOCIÓN</span>
                                                     <span className="material-symbols-outlined text-5xl">directions_car</span>
                                                 </div>
                                             )}

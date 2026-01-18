@@ -693,7 +693,7 @@ export default function Admin() {
                                                         decoding="async"
                                                         onError={(e) => {
                                                             e.target.onerror = null;
-                                                            e.target.src = '/logo-rect.png';
+                                                            e.target.src = '/logo_nuevo_rect_png.png';
                                                         }}
                                                     />
                                                 </picture>

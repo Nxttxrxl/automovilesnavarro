@@ -30,8 +30,8 @@ export default function Navbar() {
                     {/* Logo */}
                     <Link to="/" className="flex items-center z-50">
                         <img
-                            src="/logo-rect.png"
-                            alt="Navarro Automoción"
+                            src="/logo_nuevo_rect_png.png"
+                            alt="Automoción Navarro"
                             className="h-10 md:h-14 w-auto object-contain mix-blend-multiply"
                         />
                     </Link>
@@ -69,6 +69,14 @@ export default function Navbar() {
                         Contacto
                     </a>
 
+                    {/* Mobile Catalog Button - Always Visible */}
+                    <Link
+                        to="/catalogo"
+                        className="md:hidden flex items-center justify-center px-4 py-2 ml-auto mr-4 bg-blue-600 text-white text-sm font-bold rounded-lg shadow-sm hover:bg-blue-700 transition-colors"
+                    >
+                        Catálogo
+                    </Link>
+
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
@@ -96,16 +104,6 @@ export default function Navbar() {
                             >
                                 Inicio
                             </Link>
-                            <Link
-                                to="/catalogo"
-                                onClick={() => setIsOpen(false)}
-                                className={`block py-3 px-4 rounded-lg transition-all ${location.pathname === "/catalogo"
-                                    ? "bg-blue-50 text-blue-600 font-bold"
-                                    : "text-slate-700 hover:bg-slate-50"
-                                    }`}
-                            >
-                                Catálogo
-                            </Link>
 
                             {/* Mobile Contact Button */}
                             <a
@@ -113,7 +111,7 @@ export default function Navbar() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => setIsOpen(false)}
-                                className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all shadow-md"
+                                className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 text-slate-800 font-medium rounded-lg transition-all"
                             >
                                 <span className="material-symbols-outlined text-[18px]">chat</span>
                                 Contacto

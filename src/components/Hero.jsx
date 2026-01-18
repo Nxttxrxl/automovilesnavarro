@@ -37,7 +37,14 @@ export default function Hero() {
                             {HERO_DESCRIPTION}
                         </p>
 
-                        <div className="mt-4">
+                        <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
+                            <a
+                                className="inline-flex bg-blue-600 hover:bg-blue-700 text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-blue-500/30 items-center justify-center gap-2"
+                                href="/catalogo"
+                            >
+                                <span className="material-symbols-outlined">directions_car</span>
+                                Ver Inventario Web
+                            </a>
                             <a
                                 className="inline-flex bg-[#13C1AC] hover:bg-[#11AE9A] text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-teal-500/30 items-center justify-center gap-2"
                                 href="https://es.wallapop.com/user/navarroa-334767045"
@@ -45,7 +52,7 @@ export default function Hero() {
                                 rel="noopener noreferrer"
                             >
                                 <span className="material-symbols-outlined">storefront</span>
-                                Ver Catálogo en Wallapop
+                                Ver Catálogo Wallapop
                             </a>
                         </div>
 
@@ -66,7 +73,7 @@ export default function Hero() {
                         <div className="relative rounded-2xl overflow-hidden shadow-2xl drop-shadow-2xl transform hover:scale-105 transition-transform duration-500 max-h-[500px] lg:-mt-32">
                             <img
                                 src={heroImage}
-                                alt="Coche de lujo Navarro Automoción"
+                                alt="Coche de lujo Automoción Navarro"
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>

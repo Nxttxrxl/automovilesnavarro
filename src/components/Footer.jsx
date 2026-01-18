@@ -7,7 +7,7 @@ export default function Footer() {
                     <div className="col-span-1 lg:col-span-1">
                         <div className="flex items-center gap-3 mb-6">
                             <span className="font-bold text-xl tracking-tight">
-                                Navarro Automoción
+                                Automoción Navarro
                             </span>
                         </div>
                         <p className="text-slate-400 text-sm leading-relaxed mb-6">
@@ -100,7 +100,7 @@ export default function Footer() {
 
                 {/* Copyright */}
                 <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-                    <p>© 2025 Navarro Automoción. 20 años de servicio.</p>
+                    <p>© 2025 Automoción Navarro. 20 años de servicio.</p>
                     <div className="flex gap-6">
                         <a className="hover:text-white transition-colors" href="#">
                             Aviso Legal

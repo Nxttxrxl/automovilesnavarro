@@ -9,7 +9,7 @@ export default function Catalogo() {
                         Nuestro Stock
                     </h1>
                     <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
-                        Vehículos seleccionados, revisados y con garantía Navarro Automoción.
+                        Vehículos seleccionados, revisados y con garantía Automoción Navarro.
                     </p>
                 </div>
             </div>
