@@ -335,11 +335,11 @@ export default function StockGrid() {
                                             {car.imagen ? (
                                                 <picture className="w-full h-full">
                                                     <source
-                                                        srcSet={`/inventory_webp/${car.imagen.replace(/\.[^/.]+$/, "")}.webp`}
+                                                        srcSet={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${car.imagen.replace(/\.[^/.]+$/, "")}.webp`}
                                                         type="image/webp"
                                                     />
                                                     <img
-                                                        src={`/inventory_png/${car.imagen.replace(/\.[^/.]+$/, "")}.png`}
+                                                        src={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${car.imagen}`}
                                                         alt={`${car.marca} ${car.modelo}`}
                                                         className="w-full h-full object-cover"
                                                         loading="lazy"

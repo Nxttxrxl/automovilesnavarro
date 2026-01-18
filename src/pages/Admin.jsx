@@ -3,13 +3,42 @@ import { supabase } from "../lib/supabaseClient";
 
 // Utility function to sanitize filenames
 function sanitizeFilename(filename) {
+    if (!filename) return "";
     return filename
-        .normalize('NFD') // Decompose combined characters
-        .replace(/[\u0300-\u036f]/g, '') // Remove diacritical marks (accents)
-        .replace(/[^a-zA-Z0-9\s\-_.]/g, '') // Keep only alphanumeric, spaces, hyphens, underscores, dots
-        .replace(/\s+/g, ' ') // Normalize multiple spaces to single space
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-zA-Z0-9\s\-_.]/g, '')
+        .replace(/\s+/g, ' ')
         .trim();
 }
+
+// Utility to convert image to WebP blob
+const convertToWebP = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                canvas.toBlob((blob) => {
+                    if (blob) {
+                        resolve(blob);
+                    } else {
+                        reject(new Error('Canvas toBlob failed'));
+                    }
+                }, 'image/webp', 0.82);
+            };
+            img.onerror = reject;
+            img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+};
 
 export default function Admin() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -113,32 +142,39 @@ export default function Admin() {
         setMessage({ type: "", text: "" });
 
         try {
-            let imageUrl = editingCar?.imagen || null;
+            let finalImageName = editingCar?.imagen || null;
 
-            // 1. Upload image to Supabase Storage if a new one is selected
+            // 1. Upload images to Supabase Storage if a new one is selected
             if (imageFile) {
-                const fileExt = imageFile.name.split('.').pop();
-                const rawFileName = `${formData.marca} ${formData.modelo} ${formData.matricula || Date.now()}.${fileExt}`;
-                const fileName = sanitizeFilename(rawFileName);
-                const filePath = fileName;
+                const baseName = sanitizeFilename(`${formData.marca} ${formData.modelo} ${formData.matricula || Date.now()}`);
+                const fileExt = imageFile.name.split('.').pop().toLowerCase();
+                const originalFullName = `${baseName}.${fileExt}`;
+                const webpFullName = `${baseName}.webp`;
 
-                const { data: uploadData, error: uploadError } = await supabase.storage
+                // Upload original file
+                const { error: uploadError } = await supabase.storage
                     .from('coches')
-                    .upload(filePath, imageFile, {
+                    .upload(originalFullName, imageFile, {
                         cacheControl: '3600',
-                        upsert: false
+                        upsert: true
                     });
 
-                if (uploadError) {
-                    throw new Error(`Error al subir imagen: ${uploadError.message}`);
+                if (uploadError) throw new Error(`Error original: ${uploadError.message}`);
+
+                // Generate and upload WebP version
+                try {
+                    const webpBlob = await convertToWebP(imageFile);
+                    await supabase.storage
+                        .from('coches')
+                        .upload(webpFullName, webpBlob, {
+                            cacheControl: '3600',
+                            upsert: true
+                        });
+                } catch (err) {
+                    console.warn('WebP conversion/upload failed:', err);
                 }
 
-                // 2. Get public URL
-                const { data: urlData } = supabase.storage
-                    .from('coches')
-                    .getPublicUrl(filePath);
-
-                imageUrl = fileName;
+                finalImageName = originalFullName;
             }
 
             // 3. Prepare car data
@@ -155,7 +191,7 @@ export default function Admin() {
                 etiqueta: formData.etiqueta || null,
                 motor: formData.motor || null,
                 descripcion: formData.descripcion || null,
-                imagen: imageUrl
+                imagen: finalImageName
             };
 
             if (editingCar) {
@@ -646,11 +682,11 @@ export default function Admin() {
                                             {car.imagen ? (
                                                 <picture className="w-full h-full">
                                                     <source
-                                                        srcSet={`/inventory_webp/${car.imagen.replace(/\.[^/.]+$/, "")}.webp`}
+                                                        srcSet={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${car.imagen.replace(/\.[^/.]+$/, "")}.webp`}
                                                         type="image/webp"
                                                     />
                                                     <img
-                                                        src={`/inventory_png/${car.imagen.replace(/\.[^/.]+$/, "")}.png`}
+                                                        src={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${car.imagen}`}
                                                         alt={`${car.marca} ${car.modelo}`}
                                                         className="w-full h-full object-cover"
                                                         loading="lazy"
