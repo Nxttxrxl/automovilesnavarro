@@ -12,18 +12,27 @@ const LABEL_OPTIONS = [
     { value: 'Sin Etiqueta', label: 'Sin Etiqueta', image: null }
 ];
 
-// Custom slider styles
+// Custom slider styles - Premium Edition
 const sliderStyles = {
-    trackStyle: { backgroundColor: '#2563eb', height: 6 },
-    handleStyle: {
-        borderColor: '#2563eb',
-        backgroundColor: '#fff',
-        width: 20,
-        height: 20,
-        marginTop: -7,
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    trackStyle: {
+        backgroundColor: '#004A99',
+        height: 8,
+        borderRadius: 4
     },
-    railStyle: { backgroundColor: '#e5e7eb', height: 6 },
+    handleStyle: {
+        borderColor: '#004A99',
+        backgroundColor: '#fff',
+        width: 24,
+        height: 16,
+        borderRadius: 4,
+        marginTop: -4,
+        boxShadow: '0 2px 8px rgba(0, 74, 153, 0.3)',
+    },
+    railStyle: {
+        backgroundColor: '#e5e7eb',
+        height: 8,
+        borderRadius: 4
+    },
 };
 
 export default function StockGrid() {
@@ -36,6 +45,9 @@ export default function StockGrid() {
     const [marcaSeleccionada, setMarcaSeleccionada] = useState("");
     const [precioRango, setPrecioRango] = useState([0, 60000]);
     const [anioRango, setAnioRango] = useState([2000, 2026]);
+    const [kmRango, setKmRango] = useState([0, 350000]);
+    const [cvRango, setCvRango] = useState([60, 500]);
+    const [combustibleSeleccionado, setCombustibleSeleccionado] = useState("");
     const [etiquetaSeleccionada, setEtiquetaSeleccionada] = useState("");
 
     useEffect(() => {
@@ -94,6 +106,21 @@ export default function StockGrid() {
                 return false;
             }
 
+            // Filter by kilometraje range
+            if (car.km != null && (car.km < kmRango[0] || car.km > kmRango[1])) {
+                return false;
+            }
+
+            // Filter by potencia (CV) range
+            if (car.cv != null && (car.cv < cvRango[0] || car.cv > cvRango[1])) {
+                return false;
+            }
+
+            // Filter by combustible type
+            if (combustibleSeleccionado && car.combustible !== combustibleSeleccionado) {
+                return false;
+            }
+
             // Filter by environmental label
             if (etiquetaSeleccionada) {
                 if (etiquetaSeleccionada === 'Sin Etiqueta') {
@@ -105,12 +132,15 @@ export default function StockGrid() {
 
             return true;
         });
-    }, [cars, marcaSeleccionada, precioRango, anioRango, etiquetaSeleccionada]);
+    }, [cars, marcaSeleccionada, precioRango, anioRango, kmRango, cvRango, combustibleSeleccionado, etiquetaSeleccionada]);
 
     const resetFilters = () => {
         setMarcaSeleccionada("");
         setPrecioRango([0, 60000]);
         setAnioRango([2000, 2026]);
+        setKmRango([0, 350000]);
+        setCvRango([60, 500]);
+        setCombustibleSeleccionado("");
         setEtiquetaSeleccionada("");
     };
 
@@ -143,8 +173,9 @@ export default function StockGrid() {
 
                 <div className="md:flex md:gap-8">
                     {/* Filter Bar - Collapsible on mobile, now a sticky sidebar on desktop */}
-                    <div className={`bg-white rounded-xl border border-slate-200 p-6 shadow-sm transition-all duration-300 md:w-1/4 md:sticky md:top-24 md:self-start ${filtersOpen ? 'block mb-8' : 'hidden md:block'
-                        }`}>
+                    <div className={`bg-white rounded-xl border border-slate-200 p-6 transition-all duration-300 md:w-1/4 md:sticky md:top-24 md:self-start ${filtersOpen ? 'block mb-8' : 'hidden md:block'
+                        }`}
+                        style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)', borderRadius: '12px' }}>
                         <div className="flex flex-col gap-6"> {/* Removed lg:flex-row as it's now a column */}
                             {/* Brand Filter */}
                             <div className="flex-1">
@@ -188,7 +219,7 @@ export default function StockGrid() {
                             </div>
 
                             {/* Year Range Slider */}
-                            <div className="flex-1">
+                            <div className="flex-1" style={{ paddingBottom: '1.5rem' }}>
                                 <label className="block text-sm font-medium text-slate-700 mb-2">
                                     Rango de Año
                                 </label>
@@ -208,6 +239,71 @@ export default function StockGrid() {
                                         {anioRango[0]} - {anioRango[1]}
                                     </div>
                                 </div>
+                            </div>
+
+                            {/* Kilometraje Range Slider */}
+                            <div className="flex-1" style={{ paddingBottom: '1.5rem' }}>
+                                <label className="block text-sm font-medium text-slate-700 mb-2">
+                                    Kilometraje
+                                </label>
+                                <div className="px-2 pt-2">
+                                    <Slider
+                                        range
+                                        min={0}
+                                        max={350000}
+                                        step={5000}
+                                        value={kmRango}
+                                        onChange={setKmRango}
+                                        trackStyle={[sliderStyles.trackStyle]}
+                                        handleStyle={[sliderStyles.handleStyle, sliderStyles.handleStyle]}
+                                        railStyle={sliderStyles.railStyle}
+                                    />
+                                    <div className="text-sm text-slate-600 mt-3 text-center font-medium">
+                                        {kmRango[0].toLocaleString('es-ES')} km - {kmRango[1] >= 350000 ? '350,000+' : kmRango[1].toLocaleString('es-ES')} km
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Potencia (CV) Range Slider */}
+                            <div className="flex-1" style={{ paddingBottom: '1.5rem' }}>
+                                <label className="block text-sm font-medium text-slate-700 mb-2">
+                                    Potencia (CV)
+                                </label>
+                                <div className="px-2 pt-2">
+                                    <Slider
+                                        range
+                                        min={60}
+                                        max={500}
+                                        step={10}
+                                        value={cvRango}
+                                        onChange={setCvRango}
+                                        trackStyle={[sliderStyles.trackStyle]}
+                                        handleStyle={[sliderStyles.handleStyle, sliderStyles.handleStyle]}
+                                        railStyle={sliderStyles.railStyle}
+                                    />
+                                    <div className="text-sm text-slate-600 mt-3 text-center font-medium">
+                                        {cvRango[0]} CV - {cvRango[1] >= 500 ? '500+' : cvRango[1]} CV
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Combustible Filter */}
+                            <div className="flex-1" style={{ paddingBottom: '1.5rem' }}>
+                                <label htmlFor="combustible" className="block text-sm font-medium text-slate-700 mb-2">
+                                    Combustible
+                                </label>
+                                <select
+                                    id="combustible"
+                                    value={combustibleSeleccionado}
+                                    onChange={(e) => setCombustibleSeleccionado(e.target.value)}
+                                    className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#004A99] focus:border-transparent transition-all"
+                                >
+                                    <option value="">Todos los tipos</option>
+                                    <option value="Diésel">Diésel</option>
+                                    <option value="Gasolina">Gasolina</option>
+                                    <option value="Híbrido">Híbrido</option>
+                                    <option value="Eléctrico">Eléctrico</option>
+                                </select>
                             </div>
                         </div>
 

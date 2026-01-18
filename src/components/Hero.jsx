@@ -1,6 +1,34 @@
-import heroImage from "../assets/images/Gemini_Generated_Image_z0zxu4z0zxu4z0zx.png";
+import { useEffect, useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 
 export default function Hero() {
+    const [featuredCars, setFeaturedCars] = useState([]);
+
+    useEffect(() => {
+        async function fetchFeaturedCars() {
+            // Fetch all cars and filter for those with real Spanish license plates
+            const { data } = await supabase
+                .from("coches")
+                .select("*");
+
+            if (data) {
+                // Filter cars with Spanish license plate format (4 digits + 3 letters)
+                // This ensures photos show uncensored plates
+                const carsWithRealPlates = data.filter(car => {
+                    if (!car.matricula) return false;
+                    // Spanish plate format: 1234ABC
+                    const plateRegex = /^\d{4}[A-Z]{3}$/;
+                    return plateRegex.test(car.matricula);
+                });
+
+                // Get 3 random cars from those with real plates
+                const shuffled = carsWithRealPlates.sort(() => 0.5 - Math.random());
+                setFeaturedCars(shuffled.slice(0, 3));
+            }
+        }
+        fetchFeaturedCars();
+    }, []);
+
     // Textos blindados - NO MODIFICAR
     const HERO_TITLE = "Nuestros coches te pueden gustar más o menos, pero hay una cosa garantizada: ";
     const HERO_HIGHLIGHT = "Máxima honestidad";
@@ -12,7 +40,7 @@ export default function Hero() {
     const STAT_2_LABEL = "Valoración Clientes";
 
     return (
-        <section className="relative bg-white overflow-hidden pt-32 pb-24 lg:pt-48 lg:pb-36">
+        <section className="relative bg-[#F9FAFB] overflow-hidden pt-32 pb-24 lg:pt-48 lg:pb-36">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
                     {/* Text Column */}
@@ -42,8 +70,8 @@ export default function Hero() {
                                 className="inline-flex bg-[#004A99] hover:bg-[#003d7a] text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-[#004A99]/30 items-center justify-center gap-2"
                                 href="/catalogo"
                             >
-                                <span className="material-symbols-outlined">directions_car</span>
-                                Ver Inventario Web
+                                <span className="material-symbols-outlined">search</span>
+                                Explorar Inventario
                             </a>
                             <a
                                 className="inline-flex bg-[#13C1AC] hover:bg-[#11AE9A] text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-teal-500/30 items-center justify-center gap-2"
@@ -56,7 +84,7 @@ export default function Hero() {
                             </a>
                         </div>
 
-                        <div className="flex items-center gap-8 mt-6 pt-8 border-t border-slate-100">
+                        <div className="flex items-center gap-8 mt-6 pt-8 border-t border-slate-200">
                             <div>
                                 <p className="text-3xl font-bold text-[#1F2937]">{STAT_1_NUMBER}</p>
                                 <p className="text-sm text-slate-500">{STAT_1_LABEL}</p>
@@ -68,19 +96,66 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    {/* Image Column */}
+                    {/* Bento Grid Column */}
                     <div className="lg:w-1/2 relative z-0">
-                        <div className="relative rounded-2xl overflow-hidden shadow-2xl drop-shadow-2xl transform hover:scale-105 transition-transform duration-500 max-h-[500px] lg:-mt-32">
-                            <img
-                                src={heroImage}
-                                alt="Coche de lujo Automoción Navarro"
-                                className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        <div className="grid grid-cols-2 gap-4 h-[500px]">
+                            {/* Top Left - Car 1 */}
+                            <div className="relative rounded-xl overflow-hidden shadow-lg group bg-slate-200">
+                                {featuredCars[0] && (
+                                    <>
+                                        <img
+                                            src={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${featuredCars[0].imagen}`}
+                                            alt={`${featuredCars[0].marca} ${featuredCars[0].modelo}`}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            loading="lazy"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                        <div className="absolute bottom-4 left-4 text-white">
+                                            <p className="font-bold text-lg">{featuredCars[0].marca} {featuredCars[0].modelo}</p>
+                                            <p className="text-sm opacity-90">{featuredCars[0].precio?.toLocaleString('es-ES')}€</p>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+
+                            {/* Top Right - Car 2 */}
+                            <div className="relative rounded-xl overflow-hidden shadow-lg group bg-slate-200">
+                                {featuredCars[1] && (
+                                    <>
+                                        <img
+                                            src={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${featuredCars[1].imagen}`}
+                                            alt={`${featuredCars[1].marca} ${featuredCars[1].modelo}`}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            loading="lazy"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                        <div className="absolute bottom-4 left-4 text-white">
+                                            <p className="font-bold text-lg">{featuredCars[1].marca} {featuredCars[1].modelo}</p>
+                                            <p className="text-sm opacity-90">{featuredCars[1].precio?.toLocaleString('es-ES')}€</p>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+
+                            {/* Bottom Full Width - Car 3 */}
+                            <div className="col-span-2 relative rounded-xl overflow-hidden shadow-lg group bg-slate-200">
+                                {featuredCars[2] && (
+                                    <>
+                                        <img
+                                            src={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${featuredCars[2].imagen}`}
+                                            alt={`${featuredCars[2].marca} ${featuredCars[2].modelo}`}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                            loading="lazy"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                        <div className="absolute bottom-4 left-4 text-white">
+                                            <p className="font-bold text-lg">{featuredCars[2].marca} {featuredCars[2].modelo}</p>
+                                            <p className="text-sm opacity-90">{featuredCars[2].precio?.toLocaleString('es-ES')}€</p>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
                         </div>
-                        {/* Decorative Blob */}
-                        <div className="absolute -top-10 -right-10 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -z-10 animate-blob"></div>
-                        <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 -z-10 animate-blob animation-delay-2000"></div>
                     </div>
                 </div>
             </div>
