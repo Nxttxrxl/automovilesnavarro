@@ -289,11 +289,19 @@ export default function StockGrid() {
                                         {/* Image with aspect-video ratio */}
                                         <div className="aspect-video bg-gradient-to-br from-slate-100 to-slate-50 relative overflow-hidden flex items-center justify-center border-b border-slate-100">
                                             {car.imagen ? (
-                                                <img
-                                                    src={car.imagen}
-                                                    alt={`${car.marca} ${car.modelo}`}
-                                                    className="w-full h-full object-cover"
-                                                />
+                                                <picture>
+                                                    <source
+                                                        srcSet={`/inventory_webp/${decodeURIComponent(car.imagen.split('/').pop().replace(/\.[^/.]+$/, ""))}.webp`}
+                                                        type="image/webp"
+                                                    />
+                                                    <img
+                                                        src={`/inventory_png/${decodeURIComponent(car.imagen.split('/').pop().replace(/\.[^/.]+$/, ""))}.png`}
+                                                        alt={`${car.marca} ${car.modelo}`}
+                                                        className="w-full h-full object-cover"
+                                                        loading="lazy"
+                                                        decoding="async"
+                                                    />
+                                                </picture>
                                             ) : (
                                                 <div className="flex flex-col items-center justify-center gap-3 text-slate-300">
                                                     <span className="text-2xl font-black tracking-tighter text-slate-400">NAVARRO</span>
