@@ -7,6 +7,7 @@ Este directorio contiene herramientas para la gestión de datos, mantenimiento y
 | Script | Descripción | Uso |
 | :--- | :--- | :--- |
 | `emergency_restore.js` | Restauración completa de la DB desde `current_inventory.json`. | `node scripts/emergency_restore.js` |
+| `refresh_backup.js` | Actualiza `current_inventory.json` con los datos actuales de la DB. | `node scripts/refresh_backup.js` |
 | `verify_all_photos.js` | Verifica la integridad entre local, Storage y Base de Datos. | `node scripts/verify_all_photos.js` |
 | `list_cars_without_images.js` | Lista todos los vehículos que no tienen imagen vinculada. | `node scripts/list_cars_without_images.js` |
 

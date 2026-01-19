@@ -8,6 +8,7 @@ const __dirname = path.dirname(__filename)
 // Scripts to KEEP (essential for maintenance)
 const keepScripts = [
     'emergency_restore.js',  // For database recovery
+    'refresh_backup.js',     // For refreshing JSON backup
     'verify_all_photos.js',  // For verification
     'list_cars_without_images.js', // For checking status
     'importar_fotos.js',     // Original import script
