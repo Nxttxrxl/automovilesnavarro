@@ -654,7 +654,10 @@ export default function StockGrid() {
                               </p>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 mb-3">
+                            {/* Specs Display: Grid on Desktop/Grid Mode, Single Line on Mobile List Mode */}
+                            <div
+                              className={`${viewMode === 'list' ? 'hidden md:grid' : 'grid'} grid-cols-2 gap-2 text-xs text-slate-600 mb-3`}
+                            >
                               <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
                                 <span className="material-symbols-outlined text-[18px] text-primary mb-1">
                                   engineering
@@ -690,6 +693,21 @@ export default function StockGrid() {
                                 </div>
                               </div>
                             </div>
+
+                            {/* Compact Specs Line for Mobile List Mode */}
+                            <div
+                              className={`${viewMode === 'list' ? 'block md:hidden' : 'hidden'} mb-3`}
+                            >
+                              <p className="text-xs text-slate-500 font-medium flex flex-wrap gap-2 items-center">
+                                <span>{car.year}</span>
+                                <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                                <span>{car.cv} CV</span>
+                                <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                                <span className="truncate">
+                                  {car.combustible}
+                                </span>
+                              </p>
+                            </div>
                           </div>
 
                           {/* Dual Buttons */}
@@ -699,24 +717,50 @@ export default function StockGrid() {
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md"
+                              className={`bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md ${
+                                viewMode === 'list'
+                                  ? 'py-2 px-3 text-sm'
+                                  : 'py-3 px-4'
+                              }`}
                             >
-                              <span className="material-symbols-outlined text-[20px]">
+                              <span
+                                className={`material-symbols-outlined ${viewMode === 'list' ? 'text-[18px]' : 'text-[20px]'}`}
+                              >
                                 bookmark
                               </span>
-                              <span className="hidden sm:inline">Reservar</span>
+                              <span
+                                className={
+                                  viewMode === 'list'
+                                    ? 'inline md:hidden'
+                                    : 'hidden sm:inline'
+                                }
+                              >
+                                Reservar
+                              </span>
                             </a>
                             <a
                               href={getWhatsAppLink(car, false)}
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md"
+                              className={`bg-primary hover:bg-blue-700 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md ${
+                                viewMode === 'list'
+                                  ? 'py-2 px-3 text-sm'
+                                  : 'py-3 px-4'
+                              }`}
                             >
-                              <span className="material-symbols-outlined text-[20px]">
+                              <span
+                                className={`material-symbols-outlined ${viewMode === 'list' ? 'text-[18px]' : 'text-[20px]'}`}
+                              >
                                 chat
                               </span>
-                              <span className="hidden sm:inline">
+                              <span
+                                className={
+                                  viewMode === 'list'
+                                    ? 'inline md:hidden'
+                                    : 'hidden sm:inline'
+                                }
+                              >
                                 Consultar
                               </span>
                             </a>
