@@ -550,7 +550,7 @@ export default function StockGrid() {
               <span className="font-semibold text-slate-900">
                 {sortedCars.length}
               </span>{' '}
-              unidades disponibles para entrega inmediata
+              unidades disponibles
             </div>
 
             {sortedCars.length === 0 ? (
@@ -582,214 +582,227 @@ export default function StockGrid() {
                         className={`group bg-white rounded-lg overflow-hidden border border-slate-200 hover:border-primary/50 transition-all duration-300 hover:shadow-lg ${
                           viewMode === 'grid'
                             ? 'flex flex-col'
-                            : 'flex flex-row'
+                            : 'flex flex-col'
                         }`}
                       >
-                        {/* Left Column: Image (and Buttons on Mobile List View) */}
+                        {/* Top Section: Image + Info (for list view on mobile) */}
                         <div
-                          className={`${viewMode === 'list' ? 'flex flex-col w-36 xs:w-40 md:w-80 lg:w-96 shrink-0 border-r border-slate-100' : 'w-full'}`}
+                          className={`${viewMode === 'list' ? 'flex flex-row' : 'flex flex-col'}`}
                         >
-                          {/* Clickable Image that links to detail page */}
-                          <Link
-                            to={`/catalogo/${slug}`}
-                            className={`bg-gradient-to-br from-slate-100 to-slate-50 relative overflow-hidden shrink-0 block ${
-                              viewMode === 'grid'
-                                ? 'aspect-video w-full border-b border-slate-100'
-                                : 'w-full aspect-[4/3] md:border-r md:border-slate-100'
-                            }`}
+                          {/* Left Column: Image */}
+                          <div
+                            className={`${viewMode === 'list' ? 'w-36 xs:w-40 md:w-80 lg:w-96 shrink-0' : 'w-full'}`}
                           >
-                            {car.imagen ? (
-                              <picture className="w-full h-full">
-                                <source
-                                  srcSet={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${car.imagen.replace(/\.[^/.]+$/, '')}.webp`}
-                                  type="image/webp"
-                                />
-                                <img
-                                  src={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${car.imagen}`}
-                                  alt={`${car.marca} ${car.modelo}`}
-                                  className={`w-full h-full object-cover transition-all ${car.estado === 'Vendido' ? 'grayscale opacity-70' : ''}`}
-                                  loading="lazy"
-                                  decoding="async"
-                                  onError={(e) => {
-                                    e.target.onerror = null;
-                                    e.target.src = '/logo_nuevo_rect_png.png';
-                                  }}
-                                />
-                              </picture>
-                            ) : (
-                              <div className="flex flex-col items-center justify-center gap-3 text-slate-300 h-full">
-                                <span className="text-2xl font-black tracking-tighter text-slate-400">
-                                  AUTOMOCIÓN
-                                </span>
-                                <span className="material-symbols-outlined text-5xl">
-                                  directions_car
-                                </span>
-                              </div>
-                            )}
-
-                            {/* Badge Estado */}
-                            {car.estado && car.estado !== 'Activo' && (
-                              <div
-                                className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10 ${
-                                  car.estado === 'Vendido'
-                                    ? 'bg-red-500 text-white'
-                                    : car.estado === 'Reservado'
-                                      ? 'bg-orange-500 text-white'
-                                      : 'bg-green-500 text-white'
+                            {/* Image wrapper with padding only in list view */}
+                            <div
+                              className={`${viewMode === 'list' ? 'px-2 py-2' : ''}`}
+                            >
+                              {/* Clickable Image that links to detail page */}
+                              <Link
+                                to={`/catalogo/${slug}`}
+                                className={`bg-gradient-to-br from-slate-100 to-slate-50 relative overflow-hidden block rounded-lg ${
+                                  viewMode === 'grid'
+                                    ? 'aspect-video w-full'
+                                    : 'w-full aspect-[4/3]'
                                 }`}
                               >
-                                {car.estado.toUpperCase()}
-                              </div>
-                            )}
-                          </Link>
+                                {car.imagen ? (
+                                  <picture className="w-full h-full">
+                                    <source
+                                      srcSet={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${car.imagen.replace(/\.[^/.]+$/, '')}.webp`}
+                                      type="image/webp"
+                                    />
+                                    <img
+                                      src={`https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${car.imagen}`}
+                                      alt={`${car.marca} ${car.modelo}`}
+                                      className={`w-full h-full object-cover transition-all ${car.estado === 'Vendido' ? 'grayscale opacity-70' : ''}`}
+                                      loading="lazy"
+                                      decoding="async"
+                                      onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src =
+                                          '/logo_nuevo_rect_png.png';
+                                      }}
+                                    />
+                                  </picture>
+                                ) : (
+                                  <div className="flex flex-col items-center justify-center gap-3 text-slate-300 h-full">
+                                    <span className="text-2xl font-black tracking-tighter text-slate-400">
+                                      AUTOMOCIÓN
+                                    </span>
+                                    <span className="material-symbols-outlined text-5xl">
+                                      directions_car
+                                    </span>
+                                  </div>
+                                )}
 
-                          {/* Mobile List View Buttons (Under Image) - Row Layout */}
-                          {viewMode === 'list' && (
-                            <div className="md:hidden grid grid-cols-2 gap-2 p-2 bg-slate-50 border-t border-slate-100">
+                                {/* Badge Estado */}
+                                {car.estado && car.estado !== 'Activo' && (
+                                  <div
+                                    className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10 ${
+                                      car.estado === 'Vendido'
+                                        ? 'bg-red-500 text-white'
+                                        : car.estado === 'Reservado'
+                                          ? 'bg-orange-500 text-white'
+                                          : 'bg-green-500 text-white'
+                                    }`}
+                                  >
+                                    {car.estado.toUpperCase()}
+                                  </div>
+                                )}
+                              </Link>
+                            </div>
+                          </div>
+
+                          {/* Right Column: Content/Info */}
+                          <div
+                            className={`${viewMode === 'list' ? 'p-3 flex-grow flex flex-col' : 'p-4 flex-grow flex flex-col'}`}
+                          >
+                            <div className="flex-grow">
+                              <Link to={`/catalogo/${slug}`}>
+                                <div className="flex items-center justify-between mb-1">
+                                  <h3 className="text-lg font-black font-satoshi text-slate-900 group-hover:text-primary transition-colors tracking-tight leading-tight">
+                                    {car.marca} {car.modelo}
+                                  </h3>
+                                  {car.year && (
+                                    <span className="text-xs font-bold font-geist px-2 py-1 bg-slate-100 text-slate-700 rounded shrink-0 ml-2">
+                                      {car.year}
+                                    </span>
+                                  )}
+                                </div>
+                              </Link>
+                              <p className="text-sm text-slate-500 mb-2 pb-2 border-b border-slate-100 truncate">
+                                {car.version}
+                              </p>
+
+                              {/* Price Display */}
+                              <div className="mb-3">
+                                <p className="text-2xl font-bold text-primary">
+                                  {formatPrice(car.precio)}
+                                </p>
+                              </div>
+
+                              {/* Specs Display: Grid on Desktop/Grid Mode, Single Line on Mobile List Mode */}
+                              <div
+                                className={`${viewMode === 'list' ? 'hidden md:grid' : 'grid'} grid-cols-2 gap-2 text-xs text-slate-600 mb-3`}
+                              >
+                                <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
+                                  <span className="material-symbols-outlined text-[18px] text-primary mb-1">
+                                    engineering
+                                  </span>
+                                  <span className="font-medium text-center">
+                                    {car.motor || 'N/A'}
+                                  </span>
+                                </div>
+                                <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
+                                  <span className="material-symbols-outlined text-[18px] text-primary mb-1">
+                                    speed
+                                  </span>
+                                  <span className="font-medium">
+                                    {car.cv || 'N/A'} CV
+                                  </span>
+                                </div>
+                                <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
+                                  <span className="material-symbols-outlined text-[18px] text-primary mb-1">
+                                    settings_suggest
+                                  </span>
+                                  <span className="font-medium">
+                                    {car.transmision || 'Manual'}
+                                  </span>
+                                </div>
+                                <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
+                                  <span className="material-symbols-outlined text-[18px] text-primary mb-1">
+                                    local_gas_station
+                                  </span>
+                                  <div className="flex items-center justify-center gap-1.5 w-full">
+                                    <span className="font-medium truncate">
+                                      {car.combustible || 'N/A'}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* Compact Specs Line for Mobile List Mode */}
+                              <div
+                                className={`${viewMode === 'list' ? 'block md:hidden' : 'hidden'} mb-3`}
+                              >
+                                <p className="text-xs text-slate-500 font-medium flex flex-wrap gap-2 items-center">
+                                  <span>{car.year}</span>
+                                  <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                                  <span>{car.cv} CV</span>
+                                  <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                                  <span className="truncate">
+                                    {car.combustible}
+                                  </span>
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Desktop Buttons (Hidden on Mobile List Mode) */}
+                            <div
+                              className={`mt-auto grid grid-cols-2 gap-2 ${viewMode === 'list' ? 'hidden md:grid' : 'grid'}`}
+                            >
                               <a
                                 href={getWhatsAppLink(car, true)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="bg-green-600 hover:bg-green-700 text-white font-bold text-xs py-2 px-2 rounded flex items-center justify-center gap-1 shadow-sm"
+                                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md h-full"
                               >
-                                <span className="material-symbols-outlined text-[16px]">
+                                <span className="material-symbols-outlined text-[20px]">
                                   bookmark
                                 </span>
-                                <span>Reservar</span>
+                                <span className="hidden sm:inline">
+                                  Reservar
+                                </span>
                               </a>
                               <a
                                 href={getWhatsAppLink(car, false)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => e.stopPropagation()}
-                                className="bg-primary hover:bg-blue-700 text-white font-bold text-xs py-2 px-2 rounded flex items-center justify-center gap-1 shadow-sm"
+                                className="bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md h-full"
                               >
-                                <span className="material-symbols-outlined text-[16px]">
+                                <span className="material-symbols-outlined text-[20px]">
                                   chat
                                 </span>
-                                <span>Contactar</span>
+                                <span className="hidden sm:inline">
+                                  Contactar
+                                </span>
                               </a>
                             </div>
-                          )}
+                          </div>
                         </div>
 
-                        {/* Content */}
-                        <div
-                          className={`${viewMode === 'list' ? 'p-3 flex-grow flex flex-col justify-between' : 'p-4 flex-grow flex flex-col'}`}
-                        >
-                          <div>
-                            <Link to={`/catalogo/${slug}`}>
-                              <div className="flex items-center justify-between mb-1">
-                                <h3 className="text-lg font-black font-satoshi text-slate-900 group-hover:text-primary transition-colors tracking-tight leading-tight">
-                                  {car.marca} {car.modelo}
-                                </h3>
-                                {car.year && (
-                                  <span className="text-xs font-bold font-geist px-2 py-1 bg-slate-100 text-slate-700 rounded shrink-0 ml-2">
-                                    {car.year}
-                                  </span>
-                                )}
-                              </div>
-                            </Link>
-                            <p className="text-sm text-slate-500 mb-2 pb-2 border-b border-slate-100 truncate">
-                              {car.version}
-                            </p>
-
-                            {/* Price Display */}
-                            <div className="mb-3">
-                              <p className="text-2xl font-bold text-primary">
-                                {formatPrice(car.precio)}
-                              </p>
-                            </div>
-
-                            {/* Specs Display: Grid on Desktop/Grid Mode, Single Line on Mobile List Mode */}
-                            <div
-                              className={`${viewMode === 'list' ? 'hidden md:grid' : 'grid'} grid-cols-2 gap-2 text-xs text-slate-600 mb-3`}
-                            >
-                              <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
-                                <span className="material-symbols-outlined text-[18px] text-primary mb-1">
-                                  engineering
-                                </span>
-                                <span className="font-medium text-center">
-                                  {car.motor || 'N/A'}
-                                </span>
-                              </div>
-                              <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
-                                <span className="material-symbols-outlined text-[18px] text-primary mb-1">
-                                  speed
-                                </span>
-                                <span className="font-medium">
-                                  {car.cv || 'N/A'} CV
-                                </span>
-                              </div>
-                              <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
-                                <span className="material-symbols-outlined text-[18px] text-primary mb-1">
-                                  settings_suggest
-                                </span>
-                                <span className="font-medium">
-                                  {car.transmision || 'Manual'}
-                                </span>
-                              </div>
-                              <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
-                                <span className="material-symbols-outlined text-[18px] text-primary mb-1">
-                                  local_gas_station
-                                </span>
-                                <div className="flex items-center justify-center gap-1.5 w-full">
-                                  <span className="font-medium truncate">
-                                    {car.combustible || 'N/A'}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Compact Specs Line for Mobile List Mode */}
-                            <div
-                              className={`${viewMode === 'list' ? 'block md:hidden' : 'hidden'} mb-3`}
-                            >
-                              <p className="text-xs text-slate-500 font-medium flex flex-wrap gap-2 items-center">
-                                <span>{car.year}</span>
-                                <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
-                                <span>{car.cv} CV</span>
-                                <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
-                                <span className="truncate">
-                                  {car.combustible}
-                                </span>
-                              </p>
-                            </div>
-                          </div>
-
-                          {/* Dual Buttons (Original Location - Hidden on Mobile List Mode) */}
-                          <div
-                            className={`mt-auto grid grid-cols-2 gap-2 ${viewMode === 'list' ? 'hidden md:grid' : 'grid'}`}
-                          >
+                        {/* Bottom Section: Mobile Buttons Row (50/50 split) - Only for List View */}
+                        {viewMode === 'list' && (
+                          <div className="md:hidden flex w-full gap-2 p-2 bg-slate-50 border-t border-slate-100">
                             <a
                               href={getWhatsAppLink(car, true)}
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md h-full"
+                              className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold text-xs py-2 px-2 rounded flex items-center justify-center gap-1 shadow-sm"
                             >
-                              <span className="material-symbols-outlined text-[20px]">
+                              <span className="material-symbols-outlined text-[16px]">
                                 bookmark
                               </span>
-                              <span className="hidden sm:inline">Reservar</span>
+                              <span>Reservar</span>
                             </a>
                             <a
                               href={getWhatsAppLink(car, false)}
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md h-full"
+                              className="flex-1 bg-primary hover:bg-blue-700 text-white font-bold text-xs py-2 px-2 rounded flex items-center justify-center gap-1 shadow-sm"
                             >
-                              <span className="material-symbols-outlined text-[20px]">
+                              <span className="material-symbols-outlined text-[16px]">
                                 chat
                               </span>
-                              <span className="hidden sm:inline">
-                                Consultar
-                              </span>
+                              <span>Contactar</span>
                             </a>
                           </div>
-                        </div>
+                        )}
                       </div>
                     );
                   })}
