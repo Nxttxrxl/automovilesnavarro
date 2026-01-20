@@ -617,27 +617,6 @@ export default function StockGrid() {
                               {car.estado.toUpperCase()}
                             </div>
                           )}
-
-                          {/* Badge Etiqueta - DGT Icon */}
-                          {car.etiqueta &&
-                            (() => {
-                              const labelOption = LABEL_OPTIONS.find(
-                                (opt) => opt.value === car.etiqueta,
-                              );
-                              if (labelOption?.image) {
-                                return (
-                                  <div className="absolute bottom-0 left-0 m-2">
-                                    <img
-                                      src={labelOption.image}
-                                      alt={`Etiqueta ${car.etiqueta}`}
-                                      className="h-8 w-auto drop-shadow-lg"
-                                      title={labelOption.label}
-                                    />
-                                  </div>
-                                );
-                              }
-                              return null;
-                            })()}
                         </Link>
 
                         {/* Content */}
