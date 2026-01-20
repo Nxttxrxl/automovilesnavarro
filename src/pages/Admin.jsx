@@ -377,7 +377,7 @@ export default function Admin() {
                 lock_person
               </span>
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 mb-2">
+            <h1 className="text-2xl font-black font-satoshi text-slate-900 mb-2">
               Panel de Administración
             </h1>
             <p className="text-slate-500">
@@ -389,7 +389,7 @@ export default function Admin() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
               >
                 Contraseña
               </label>
@@ -398,7 +398,7 @@ export default function Admin() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                className="w-full px-4 py-3 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                 placeholder="Ingresa la contraseña"
                 required
               />
@@ -430,7 +430,7 @@ export default function Admin() {
         <div className="bg-white border border-slate-200 rounded-2xl shadow-md p-8">
           <div className="flex items-center justify-between mb-8 pb-6 border-b border-slate-100">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900 mb-2">
+              <h1 className="text-3xl font-black font-satoshi text-slate-900 mb-2">
                 Panel de Administración
               </h1>
               <p className="text-slate-500">
@@ -465,7 +465,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="matricula"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Matrícula
                 </label>
@@ -475,7 +475,7 @@ export default function Admin() {
                   name="matricula"
                   value={formData.matricula}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: 1234ABC"
                 />
               </div>
@@ -484,7 +484,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="marca"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Marca <span className="text-red-500">*</span>
                 </label>
@@ -494,7 +494,7 @@ export default function Admin() {
                   name="marca"
                   value={formData.marca}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: Audi"
                   required
                 />
@@ -504,7 +504,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="modelo"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Modelo <span className="text-red-500">*</span>
                 </label>
@@ -514,7 +514,7 @@ export default function Admin() {
                   name="modelo"
                   value={formData.modelo}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: A3"
                   required
                 />
@@ -524,7 +524,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="version"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Versión
                 </label>
@@ -534,7 +534,7 @@ export default function Admin() {
                   name="version"
                   value={formData.version}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: Sportback"
                 />
               </div>
@@ -543,7 +543,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="precio"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Precio (€)
                 </label>
@@ -553,7 +553,7 @@ export default function Admin() {
                   name="precio"
                   value={formData.precio}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: 15000"
                 />
               </div>
@@ -562,7 +562,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="year"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Año
                 </label>
@@ -572,7 +572,7 @@ export default function Admin() {
                   name="year"
                   value={formData.year}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: 2020"
                   min="1990"
                   max="2026"
@@ -583,7 +583,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="km"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Kilómetros
                 </label>
@@ -593,7 +593,7 @@ export default function Admin() {
                   name="km"
                   value={formData.km}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: 50000"
                 />
               </div>
@@ -602,7 +602,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="cv"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Caballos (CV)
                 </label>
@@ -612,7 +612,7 @@ export default function Admin() {
                   name="cv"
                   value={formData.cv}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: 150"
                 />
               </div>
@@ -621,7 +621,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="combustible"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Combustible
                 </label>
@@ -644,7 +644,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="etiqueta"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Etiqueta Ambiental
                 </label>
@@ -688,7 +688,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="estado"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Estado
                 </label>
@@ -724,7 +724,7 @@ export default function Admin() {
               <div>
                 <label
                   htmlFor="motor"
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
                 >
                   Motor
                 </label>
@@ -734,7 +734,7 @@ export default function Admin() {
                   name="motor"
                   value={formData.motor}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none"
+                  className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: 2.0 TDI"
                 />
               </div>
@@ -744,7 +744,7 @@ export default function Admin() {
             <div>
               <label
                 htmlFor="descripcion"
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
               >
                 Descripción
               </label>
@@ -763,7 +763,7 @@ export default function Admin() {
             <div>
               <label
                 htmlFor="imagen"
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-bold font-satoshi text-slate-700 mb-2"
               >
                 Imagen del Vehículo
               </label>
