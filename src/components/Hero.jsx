@@ -17,7 +17,7 @@ export default function Hero() {
       type: 'stat',
       number: '+1.000',
       label: 'Vehículos entregados',
-      color: 'text-[#004A99]',
+      color: 'text-[#0F172A]',
       delay: 0,
     },
     {
@@ -34,7 +34,7 @@ export default function Hero() {
       type: 'stat',
       number: '+20 Años',
       label: 'De experiencia',
-      color: 'text-[#004A99]',
+      color: 'text-[#0F172A]',
       delay: 0.2,
     },
     {
@@ -42,7 +42,7 @@ export default function Hero() {
       type: 'stat',
       number: '12 Meses',
       label: 'De garantía',
-      color: 'text-[#004A99]',
+      color: 'text-[#0F172A]',
       delay: 0.3,
     },
   ];
@@ -96,14 +96,14 @@ export default function Hero() {
       variants={textVariants}
     >
       <a
-        className="inline-flex bg-[#004A99] hover:bg-[#003d7a] text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-[#004A99]/30 items-center justify-center gap-2"
+        className="inline-flex bg-[#0F172A] hover:bg-[#1e293b] text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-slate-900/30 items-center justify-center gap-2"
         href="/catalogo"
       >
         <span className="material-symbols-outlined">search</span>
         Explorar Inventario
       </a>
       <a
-        className="inline-flex bg-[#13C1AC] hover:bg-[#11AE9A] text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-teal-500/30 items-center justify-center gap-2"
+        className="inline-flex bg-[#0F172A] hover:bg-[#1e293b] text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-slate-900/30 items-center justify-center gap-2"
         href="https://es.wallapop.com/user/navarroa-334767045"
         target="_blank"
         rel="noopener noreferrer"
@@ -158,7 +158,7 @@ export default function Hero() {
           scale: 1.05,
           transition: { type: 'spring', ...springConfig },
         }}
-        className="bg-white/40 backdrop-blur-xl rounded-2xl shadow-lg p-6 border border-white/20 flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden will-change-transform"
+        className="bg-white/30 backdrop-blur-2xl rounded-2xl shadow-lg p-6 border border-white/40 flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden will-change-transform"
       >
         {/* Stat Card */}
         {card.type === 'stat' && (
@@ -189,7 +189,7 @@ export default function Hero() {
 
         {/* Hover glow effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-transparent to-purple-400/20 opacity-0 rounded-2xl"
+          className="absolute inset-0 bg-gradient-to-br from-indigo-400/10 via-transparent to-slate-400/10 opacity-0 rounded-2xl"
           animate={{ opacity: isHovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
         />
@@ -198,43 +198,43 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50 overflow-hidden pt-32 pb-24 lg:pt-48 lg:pb-36">
-      {/* Animated Mesh Gradients */}
+    <section className="relative bg-gradient-to-br from-slate-100 via-indigo-50/30 to-white overflow-hidden pt-32 pb-24 lg:pt-48 lg:pb-36">
+      {/* Animated Mesh Gradients - Aurora Palette */}
       <motion.div
-        className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/30 rounded-full blur-3xl"
+        className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-200/40 rounded-full blur-3xl"
         animate={{
           x: [0, 50, 0],
           y: [0, 30, 0],
           scale: [1, 1.1, 1],
         }}
         transition={{
-          duration: 20,
+          duration: 12,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
       />
       <motion.div
-        className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl"
+        className="absolute bottom-0 right-1/4 w-96 h-96 bg-slate-200/30 rounded-full blur-3xl"
         animate={{
           x: [0, -30, 0],
           y: [0, -50, 0],
           scale: [1, 1.2, 1],
         }}
         transition={{
-          duration: 25,
+          duration: 15,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
       />
       <motion.div
-        className="absolute top-1/2 right-0 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl"
+        className="absolute top-1/2 right-0 w-96 h-96 bg-indigo-100/40 rounded-full blur-3xl"
         animate={{
           x: [0, -40, 0],
           y: [0, 40, 0],
           scale: [1, 1.15, 1],
         }}
         transition={{
-          duration: 22,
+          duration: 13,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
@@ -250,29 +250,29 @@ export default function Hero() {
             animate="visible"
           >
             <motion.div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/80 backdrop-blur-sm border border-blue-100/50 w-fit"
+              className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-transparent border-2 border-[#0F172A] w-fit"
               variants={textVariants}
             >
-              <span className="size-2 rounded-full bg-primary animate-pulse"></span>
-              <span className="text-xs font-semibold text-primary tracking-wide uppercase">
+              <span className="size-2 rounded-full bg-[#0F172A] animate-pulse"></span>
+              <span className="text-xs font-semibold text-[#0F172A] tracking-wide uppercase">
                 Calidad Certificada y Trato Directo
               </span>
             </motion.div>
 
             <motion.h1
-              className="text-[26px] sm:text-[26px] lg:text-[36px] font-extrabold text-[#1F2937] tracking-tight leading-tight"
+              className="text-[26px] sm:text-[26px] lg:text-[36px] font-extrabold text-[#0F172A] tracking-tight leading-tight"
               variants={textVariants}
             >
               {HERO_TITLE}
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#004A99]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0F172A] to-slate-700">
                 {HERO_HIGHLIGHT}
               </span>
               {HERO_SUBTITLE_END}
             </motion.h1>
 
             <motion.p
-              className="text-base lg:text-lg text-slate-500 font-normal leading-relaxed max-w-lg"
+              className="text-base lg:text-lg text-slate-600 font-normal leading-relaxed max-w-lg"
               variants={textVariants}
             >
               {HERO_DESCRIPTION}
