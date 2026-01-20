@@ -11,7 +11,6 @@ export async function fetchPublicCars() {
         .select('*')
         .not('imagen', 'is', null)
         .neq('imagen', '')
-        .order('estado', { ascending: true }) // Activo < Reservado < Vendido alphabetically
         .order('id', { ascending: true })
 
     if (error) {
@@ -19,13 +18,17 @@ export async function fetchPublicCars() {
         throw error
     }
 
-    // Manual sort by estado priority since Supabase doesn't support CASE ordering directly
-    const estadoPriority = { 'Activo': 1, 'Reservado': 2, 'Vendido': 3 }
-    return data.sort((a, b) => {
-        const priorityA = estadoPriority[a.estado] || 999
-        const priorityB = estadoPriority[b.estado] || 999
-        return priorityA - priorityB
-    })
+    // If estado column exists, sort by it
+    if (data && data.length > 0 && data[0].hasOwnProperty('estado')) {
+        const estadoPriority = { 'Activo': 1, 'Reservado': 2, 'Vendido': 3 }
+        return data.sort((a, b) => {
+            const priorityA = estadoPriority[a.estado] || 999
+            const priorityB = estadoPriority[b.estado] || 999
+            return priorityA - priorityB
+        })
+    }
+
+    return data
 }
 
 /**
