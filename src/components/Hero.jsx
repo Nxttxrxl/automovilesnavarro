@@ -8,7 +8,7 @@ export default function Hero() {
   const HERO_HIGHLIGHT = 'Máxima honestidad';
   const HERO_SUBTITLE_END = ' y la mejor relación calidad/precio.';
   const HERO_DESCRIPTION =
-    '20 años seleccionando los mejores vehículos en Tarragona. Revisados a fondo para que tú solo te preocupes de conducir.';
+    'Especialistas en la selección de vehículos premium con revisión certificada y trato directo.';
 
   // Trust Cards Data
   const trustCards = [
@@ -31,16 +31,18 @@ export default function Hero() {
     },
     {
       id: 3,
-      type: 'guarantee',
-      icon: ShieldCheck,
-      title: 'Garantía Premium 12 Meses',
+      type: 'stat',
+      number: '+20 Años',
+      label: 'De experiencia',
+      color: 'text-[#004A99]',
       delay: 0.2,
     },
     {
       id: 4,
       type: 'service',
       icon: Wrench,
-      title: 'Revisión Certificada 100 Puntos',
+      title: 'Puesta a punto',
+      subtitle: 'Revisión 100 puntos',
       delay: 0.3,
     },
   ];
@@ -194,9 +196,16 @@ export default function Hero() {
                           className="w-8 h-8 sm:w-12 sm:h-12 text-[#004A99]"
                           strokeWidth={1.5}
                         />
-                        <p className="text-xs sm:text-sm text-slate-900 font-bold leading-tight">
-                          {card.title}
-                        </p>
+                        <div className="text-center">
+                          <p className="text-sm font-bold text-slate-900 leading-tight">
+                            {card.title}
+                          </p>
+                          {card.subtitle && (
+                            <p className="text-xs text-slate-500 font-medium mt-1">
+                              {card.subtitle}
+                            </p>
+                          )}
+                        </div>
                       </>
                     )}
 
