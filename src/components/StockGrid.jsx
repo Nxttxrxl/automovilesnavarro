@@ -48,7 +48,8 @@ export default function StockGrid() {
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
   const [sortOption, setSortOption] = useState('destacados'); // Sort option
   const [currentPage, setCurrentPage] = useState(1); // Current page
-  const itemsPerPage = 15; // Items per page
+
+  const itemsPerPage = viewMode === 'grid' ? 10 : 20; // 10 in grid (quadricula), 20 in list (lista)
 
   // Filter states with range sliders
   const [marcaSeleccionada, setMarcaSeleccionada] = useState('');
@@ -504,7 +505,10 @@ export default function StockGrid() {
                 {/* View Mode Toggle */}
                 <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-lg p-1">
                   <button
-                    onClick={() => setViewMode('grid')}
+                    onClick={() => {
+                      setViewMode('grid');
+                      setCurrentPage(1);
+                    }}
                     className={`p-2 rounded transition-all ${
                       viewMode === 'grid'
                         ? 'bg-blue-600 text-white shadow-sm'
@@ -517,7 +521,10 @@ export default function StockGrid() {
                     </span>
                   </button>
                   <button
-                    onClick={() => setViewMode('list')}
+                    onClick={() => {
+                      setViewMode('list');
+                      setCurrentPage(1);
+                    }}
                     className={`p-2 rounded transition-all ${
                       viewMode === 'list'
                         ? 'bg-blue-600 text-white shadow-sm'
