@@ -47,6 +47,20 @@ export default function Hero() {
 
   const springConfig = { stiffness: 100, damping: 20 };
 
+  const gridVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.3,
+        duration: 0.5,
+        type: 'spring',
+        ...springConfig,
+      },
+    },
+  };
+
   // Reusable Buttons Component
   const HeroButtons = () => (
     <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
@@ -222,11 +236,16 @@ export default function Hero() {
             {/* Enhanced atmospheric background */}
             <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-30 -z-10 pointer-events-none"></div>
 
-            <div className="grid grid-cols-2 gap-4 h-auto perspective-1000">
+            <motion.div
+              className="grid grid-cols-2 gap-4 h-auto perspective-1000"
+              variants={gridVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {trustCards.map((card, index) => (
                 <TiltCard key={card.id} card={card} index={index} />
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* Mobile Buttons (Visible only on mobile, after Grid) */}
