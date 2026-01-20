@@ -39,9 +39,10 @@ export default function Hero() {
     },
     {
       id: 4,
-      type: 'service',
-      icon: Wrench,
-      title: 'Puesta a punto',
+      type: 'stat',
+      number: '12 Meses',
+      label: 'De garantía',
+      color: 'text-[#004A99]',
       delay: 0.3,
     },
   ];
