@@ -621,11 +621,11 @@ export default function StockGrid() {
 
                         {/* Content */}
                         <div
-                          className={`${viewMode === 'list' ? 'p-3 sm:p-5' : 'p-5'} flex-grow flex flex-col`}
+                          className={`${viewMode === 'list' ? 'p-3 sm:p-4' : 'p-4'} flex-grow flex flex-col`}
                         >
                           <div className="flex-grow">
                             <Link to={`/catalogo/${slug}`}>
-                              <div className="flex items-start justify-between mb-2">
+                              <div className="flex items-center justify-between mb-1">
                                 <h3 className="text-lg font-bold text-slate-900 group-hover:text-primary transition-colors">
                                   {car.marca} {car.modelo}
                                 </h3>
@@ -636,19 +636,19 @@ export default function StockGrid() {
                                 )}
                               </div>
                             </Link>
-                            <p className="text-sm text-slate-500 mb-4 pb-3 border-b border-slate-100">
+                            <p className="text-sm text-slate-500 mb-2 pb-2 border-b border-slate-100 truncate">
                               {car.version}
                             </p>
 
                             {/* Price Display */}
-                            <div className="mb-4">
+                            <div className="mb-3">
                               <p className="text-2xl font-bold text-primary">
                                 {formatPrice(car.precio)}
                               </p>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 mb-4">
-                              <div className="flex flex-col items-center p-2 bg-slate-50 rounded">
+                            <div className="grid grid-cols-2 gap-2 text-xs text-slate-600 mb-3">
+                              <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
                                 <span className="material-symbols-outlined text-[18px] text-primary mb-1">
                                   engineering
                                 </span>
@@ -656,7 +656,7 @@ export default function StockGrid() {
                                   {car.motor || 'N/A'}
                                 </span>
                               </div>
-                              <div className="flex flex-col items-center p-2 bg-slate-50 rounded">
+                              <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
                                 <span className="material-symbols-outlined text-[18px] text-primary mb-1">
                                   speed
                                 </span>
@@ -664,7 +664,7 @@ export default function StockGrid() {
                                   {car.cv || 'N/A'} CV
                                 </span>
                               </div>
-                              <div className="flex flex-col items-center p-2 bg-slate-50 rounded">
+                              <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
                                 <span className="material-symbols-outlined text-[18px] text-primary mb-1">
                                   settings_suggest
                                 </span>
@@ -672,7 +672,7 @@ export default function StockGrid() {
                                   {car.transmision || 'Manual'}
                                 </span>
                               </div>
-                              <div className="flex flex-col items-center p-2 bg-slate-50 rounded">
+                              <div className="flex flex-col items-center p-1.5 bg-slate-50 rounded">
                                 <span className="material-symbols-outlined text-[18px] text-primary mb-1">
                                   local_gas_station
                                 </span>
