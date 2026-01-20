@@ -42,7 +42,6 @@ export default function Hero() {
       type: 'service',
       icon: Wrench,
       title: 'Puesta a punto',
-      subtitle: 'Revisión 100 puntos',
       delay: 0.3,
     },
   ];
