@@ -199,7 +199,7 @@ export default function Hero() {
     <section className="relative bg-white overflow-hidden pt-32 pb-24 lg:pt-48 lg:pb-36">
       {/* Subtle Atmospheric Fog - Elegant Mesh Gradients */}
       <motion.div
-        className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-200/40 rounded-full blur-[100px]"
+        className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-200/40 rounded-full blur-[100px] -z-10"
         animate={{
           x: [0, 50, 0],
           y: [0, 30, 0],
@@ -212,7 +212,7 @@ export default function Hero() {
         }}
       />
       <motion.div
-        className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-100/40 rounded-full blur-[100px]"
+        className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-100/40 rounded-full blur-[100px] -z-10"
         animate={{
           x: [0, -30, 0],
           y: [0, -50, 0],
@@ -225,7 +225,7 @@ export default function Hero() {
         }}
       />
       <motion.div
-        className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-blue-50/60 rounded-full blur-[100px]"
+        className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-blue-50/60 rounded-full blur-[100px] -z-10"
         animate={{
           x: [0, -40, 0],
           y: [0, 40, 0],
@@ -242,7 +242,7 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-24">
           {/* Text Column */}
           <motion.div
-            className="lg:w-1/2 flex flex-col gap-8 z-10 w-full"
+            className="lg:w-1/2 flex flex-col gap-8 relative z-20 w-full"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -278,7 +278,7 @@ export default function Hero() {
 
           {/* Trust Grid Column */}
           <motion.div
-            className="lg:w-1/2 relative z-0 w-full"
+            className="lg:w-1/2 relative z-20 w-full"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
