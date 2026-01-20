@@ -44,7 +44,7 @@ const sliderStyles = {
 export default function StockGrid() {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filtersOpen, setFiltersOpen] = useState(true); // Default open on desktop
+  const [filtersOpen, setFiltersOpen] = useState(false); // Closed by default on mobile
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
   const [sortOption, setSortOption] = useState('destacados'); // Sort option
   const [currentPage, setCurrentPage] = useState(1); // Current page
@@ -578,7 +578,7 @@ export default function StockGrid() {
                           className={`bg-gradient-to-br from-slate-100 to-slate-50 relative overflow-hidden border-b md:border-b-0 border-slate-100 shrink-0 ${
                             viewMode === 'grid'
                               ? 'aspect-video w-full'
-                              : 'w-32 sm:w-48 md:w-80 lg:w-96 aspect-[4/3] border-r self-start'
+                              : 'w-24 sm:w-32 md:w-80 lg:w-96 aspect-square md:aspect-[4/3] border-r self-start'
                           }`}
                         >
                           {car.imagen ? (
@@ -633,11 +633,11 @@ export default function StockGrid() {
                           <div className="flex-grow">
                             <Link to={`/catalogo/${slug}`}>
                               <div className="flex items-center justify-between mb-1">
-                                <h3 className="text-lg font-bold text-slate-900 group-hover:text-primary transition-colors">
+                                <h3 className="text-lg font-black font-satoshi text-slate-900 group-hover:text-primary transition-colors tracking-tight">
                                   {car.marca} {car.modelo}
                                 </h3>
                                 {car.year && (
-                                  <span className="text-xs font-semibold px-2 py-1 bg-slate-100 text-slate-700 rounded">
+                                  <span className="text-xs font-bold font-geist px-2 py-1 bg-slate-100 text-slate-700 rounded">
                                     {car.year}
                                   </span>
                                 )}
@@ -731,9 +731,10 @@ export default function StockGrid() {
                 {totalPages > 1 && (
                   <div className="mt-8 flex items-center justify-center gap-2">
                     <button
-                      onClick={() =>
-                        setCurrentPage((prev) => Math.max(prev - 1, 1))
-                      }
+                      onClick={() => {
+                        setCurrentPage((prev) => Math.max(prev - 1, 1));
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
                       disabled={currentPage === 1}
                       className={`px-4 py-2 rounded-lg font-medium transition-all ${
                         currentPage === 1
@@ -749,7 +750,10 @@ export default function StockGrid() {
                         (page) => (
                           <button
                             key={page}
-                            onClick={() => setCurrentPage(page)}
+                            onClick={() => {
+                              setCurrentPage(page);
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
                             className={`w-10 h-10 rounded-lg font-medium transition-all ${
                               currentPage === page
                                 ? 'bg-[#004A99] text-white shadow-md'
@@ -763,9 +767,12 @@ export default function StockGrid() {
                     </div>
 
                     <button
-                      onClick={() =>
-                        setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                      }
+                      onClick={() => {
+                        setCurrentPage((prev) =>
+                          Math.min(prev + 1, totalPages),
+                        );
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
                       disabled={currentPage === totalPages}
                       className={`px-4 py-2 rounded-lg font-medium transition-all ${
                         currentPage === totalPages
