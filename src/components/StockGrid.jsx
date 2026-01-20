@@ -228,7 +228,7 @@ export default function StockGrid() {
   }
 
   return (
-    <section className="py-10 bg-slate-50" id="stock">
+    <section className="pt-6 pb-10 bg-slate-50" id="stock">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile Filter Toggle Button */}
         <div className="md:hidden mb-4">
