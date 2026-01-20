@@ -30,8 +30,8 @@ export default function Hero() {
     {
       id: 3,
       type: 'stat',
-      number: '+20',
-      label: 'Años de experiencia',
+      number: '+20 Años',
+      label: '  experiencia',
       color: 'text-[#004A99]',
       delay: 0.2,
     },
@@ -127,10 +127,12 @@ export default function Hero() {
         {/* Stat Card */}
         {card.type === 'stat' && (
           <>
-            <p className={`text-3xl sm:text-5xl font-black ${card.color}`}>
+            <p
+              className={`text-3xl sm:text-5xl font-black font-satoshi tracking-tighter ${card.color}`}
+            >
               {card.number}
             </p>
-            <p className="text-xs sm:text-sm text-slate-600 font-medium">
+            <p className="text-xs sm:text-sm font-geist font-bold text-slate-600 uppercase tracking-wide">
               {card.label}
             </p>
           </>
@@ -140,12 +142,14 @@ export default function Hero() {
         {card.type === 'rating' && (
           <>
             <div className="flex items-center gap-2">
-              <p className={`text-3xl sm:text-5xl font-black ${card.color}`}>
+              <p
+                className={`text-3xl sm:text-5xl font-black font-satoshi tracking-tighter ${card.color}`}
+              >
                 {card.number}
               </p>
               <span className="text-2xl sm:text-3xl">{card.icon}</span>
             </div>
-            <p className="text-xs sm:text-sm text-slate-600 font-medium">
+            <p className="text-xs sm:text-sm font-geist font-bold text-slate-600 uppercase tracking-wide">
               {card.label}
             </p>
           </>
@@ -211,12 +215,12 @@ export default function Hero() {
             {/* Refined Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 backdrop-blur-sm border border-slate-200 shadow-sm w-fit">
               <span className="size-2 rounded-full bg-primary animate-pulse"></span>
-              <span className="text-xs font-semibold text-primary tracking-wide uppercase">
+              <span className="text-xs font-bold font-geist text-primary tracking-wider uppercase">
                 Calidad Certificada y Trato Directo
               </span>
             </div>
 
-            <h1 className="text-[26px] sm:text-[26px] lg:text-[36px] font-extrabold text-[#1F2937] tracking-tight leading-tight">
+            <h1 className="text-[26px] sm:text-[26px] lg:text-[36px] font-black font-satoshi text-[#1F2937] tracking-tight leading-tight">
               {HERO_TITLE}
               <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#004A99]">

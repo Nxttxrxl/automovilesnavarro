@@ -1,22 +1,27 @@
-@import "tailwindcss";
-
+@import 'tailwindcss';
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/style.css');
 
 /* Custom Theme Variables */
 @theme {
   /* Corporate Blue - Matches logo color */
-  --color-primary: #004A99;
+  --color-primary: #004a99;
   --color-primary-hover: #003d7a;
   --color-primary-light: #0056b3;
 
-  --color-wallapop-teal: #13C1AC;
-  --color-wallapop-teal-dark: #11AE9A;
-  --color-text-dark: #1F2937;
+  --color-wallapop-teal: #13c1ac;
+  --color-wallapop-teal-dark: #11ae9a;
+  --color-text-dark: #1f2937;
   --color-background-light: #ffffff;
   --color-background-dark: #0e172a;
   --color-surface-light: #f9fafb;
 
-  --font-display: 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-satoshi: 'Satoshi', 'Inter', sans-serif;
+  --font-geist: 'Geist Sans', 'Inter', sans-serif;
+
+  --font-display: 'Satoshi', 'Inter', sans-serif;
+  --font-body: 'Satoshi', 'Inter', sans-serif;
+  --font-data: 'Geist Sans', 'Inter', sans-serif;
 
   --radius-DEFAULT: 0.5rem;
   --radius-lg: 0.5rem;
@@ -30,7 +35,7 @@
 
 /* Base styles */
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Satoshi', 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -60,12 +65,15 @@ body {
 
 /* Material Symbols filled star */
 .filled-star {
-  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20 !important;
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 20 !important;
 }
 
 /* Custom Animation: Blue Pulse */
 @keyframes pulse-blue {
-
   0%,
   100% {
     filter: brightness(1) saturate(1);
