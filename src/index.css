@@ -1,6 +1,6 @@
-@import 'tailwindcss';
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/style.css');
+@import 'tailwindcss';
 
 /* Custom Theme Variables */
 @theme {

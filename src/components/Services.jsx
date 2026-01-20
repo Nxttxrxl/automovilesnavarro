@@ -143,7 +143,7 @@ export default function Services() {
             Nuestra Garantía de Confianza
           </h2>
           <p className="text-slate-600 text-lg font-satoshi font-medium">
-            Calidad certificada y transparencia mecánica en cada vehículo.
+            Transparencia mecánica en cada vehículo.
           </p>
         </motion.div>
 
