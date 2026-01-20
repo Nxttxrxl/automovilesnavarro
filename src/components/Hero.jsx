@@ -111,10 +111,9 @@ export default function Hero() {
     </div>
   );
 
-  // 3D Tilt Card Component with Spotlight Effect
+  // 3D Tilt Card Component
   const TiltCard = ({ card, index }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
@@ -133,11 +132,6 @@ export default function Hero() {
       const centerY = rect.top + rect.height / 2;
       x.set(event.clientX - centerX);
       y.set(event.clientY - centerY);
-
-      // Calculate mouse position relative to card for spotlight
-      const relativeX = event.clientX - rect.left;
-      const relativeY = event.clientY - rect.top;
-      setMousePosition({ x: relativeX, y: relativeY });
     };
 
     const handleMouseLeave = () => {
@@ -195,16 +189,6 @@ export default function Hero() {
           animate={{ opacity: isHovered ? 1 : 0 }}
           transition={{ duration: 0.3 }}
         />
-
-        {/* Spotlight Effect - Premium Glass Surface */}
-        {isHovered && (
-          <div
-            className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none"
-            style={{
-              background: `radial-gradient(circle 150px at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.15), transparent 70%)`,
-            }}
-          />
-        )}
       </div>
     );
   };
