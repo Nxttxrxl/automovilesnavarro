@@ -139,10 +139,10 @@ export default function Services() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ type: 'spring', ...springConfig }}
         >
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F2937] mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-black font-satoshi text-[#1F2937] mb-4 tracking-tight">
             Nuestra Garantía de Confianza
           </h2>
-          <p className="text-slate-600 text-lg">
+          <p className="text-slate-600 text-lg font-satoshi font-medium">
             Calidad certificada y transparencia mecánica en cada vehículo.
           </p>
         </motion.div>
@@ -181,15 +181,15 @@ export default function Services() {
                 {service.icon}
               </motion.div>
 
-              <h3 className="text-xl font-bold text-[#1F2937] mb-4 relative z-10">
+              <h3 className="text-xl font-black font-satoshi text-[#1F2937] mb-4 relative z-10 tracking-tight">
                 {service.title}
               </h3>
-              <p className="text-slate-600 leading-relaxed mb-4 relative z-10">
+              <p className="text-slate-600 leading-relaxed mb-4 relative z-10 font-satoshi">
                 {service.description}
               </p>
               {service.extra && (
                 <div className="mt-auto relative z-10">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase bg-blue-50/80 backdrop-blur-sm text-[#004A99] border border-blue-100/50">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold font-geist tracking-wider uppercase bg-blue-50/80 backdrop-blur-sm text-[#004A99] border border-blue-100/50">
                     {service.extra}
                   </span>
                 </div>

@@ -22,7 +22,7 @@ export default function Hero() {
       id: 2,
       type: 'rating',
       number: '4.9/5',
-      label: 'Satisfacción Clientes',
+      label: 'Valoración Clientes',
       color: 'text-amber-500',
       icon: '⭐',
       delay: 0.1,
@@ -65,14 +65,14 @@ export default function Hero() {
   const HeroButtons = () => (
     <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
       <a
-        className="inline-flex bg-[#004A99] hover:bg-[#003d7a] text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-[#004A99]/30 items-center justify-center gap-2"
+        className="inline-flex bg-[#004A99] hover:bg-[#003d7a] text-white text-base font-bold font-satoshi tracking-wide h-14 px-8 rounded-lg transition-all shadow-lg shadow-[#004A99]/30 items-center justify-center gap-2"
         href="/catalogo"
       >
         <span className="material-symbols-outlined">search</span>
         Explorar Inventario
       </a>
       <a
-        className="inline-flex bg-[#13C1AC] hover:bg-[#11AE9A] text-white text-base font-bold h-14 px-8 rounded-lg transition-all shadow-lg shadow-teal-500/30 items-center justify-center gap-2"
+        className="inline-flex bg-[#13C1AC] hover:bg-[#11AE9A] text-white text-base font-bold font-satoshi tracking-wide h-14 px-8 rounded-lg transition-all shadow-lg shadow-teal-500/30 items-center justify-center gap-2"
         href="https://es.wallapop.com/user/navarroa-334767045"
         target="_blank"
         rel="noopener noreferrer"
