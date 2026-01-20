@@ -126,81 +126,87 @@ export default function Hero() {
           </div>
 
           {/* Trust Grid Column */}
-          <motion.div
-            className="lg:w-1/2 relative z-0 w-full"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <div className="grid grid-cols-2 gap-4 h-auto">
-              {trustCards.map((card, index) => (
-                <motion.div
-                  key={card.id}
-                  variants={cardVariants}
-                  animate="animate"
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow:
-                      '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-                    transition: { duration: 0.2 },
-                  }}
-                  className="bg-white rounded-2xl shadow-md p-6 border border-slate-100 flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden"
-                  style={{
-                    animation: `float-${index} ${3 + index * 0.5}s ease-in-out infinite`,
-                  }}
-                >
-                  {/* Stat Card */}
-                  {card.type === 'stat' && (
-                    <>
-                      <p
-                        className={`text-3xl sm:text-5xl font-black ${card.color}`}
-                      >
-                        {card.number}
-                      </p>
-                      <p className="text-xs sm:text-sm text-slate-600 font-medium">
-                        {card.label}
-                      </p>
-                    </>
-                  )}
+          <div className="lg:w-1/2 relative z-0 w-full">
+            {/* ATMOSPHERE ELEMENTS */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-blue-100/50 blur-3xl opacity-50 rounded-full -z-10 pointer-events-none"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-20 -z-10 pointer-events-none"></div>
 
-                  {/* Rating Card */}
-                  {card.type === 'rating' && (
-                    <>
-                      <div className="flex items-center gap-2">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="relative z-10"
+            >
+              <div className="grid grid-cols-2 gap-4 h-auto">
+                {trustCards.map((card, index) => (
+                  <motion.div
+                    key={card.id}
+                    variants={cardVariants}
+                    animate="animate"
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow:
+                        '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                      transition: { duration: 0.2 },
+                    }}
+                    className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-md p-6 border border-white/50 flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden"
+                    style={{
+                      animation: `float-${index} ${3 + index * 0.5}s ease-in-out infinite`,
+                    }}
+                  >
+                    {/* Stat Card */}
+                    {card.type === 'stat' && (
+                      <>
                         <p
                           className={`text-3xl sm:text-5xl font-black ${card.color}`}
                         >
                           {card.number}
                         </p>
-                        <span className="text-2xl sm:text-3xl">
-                          {card.icon}
-                        </span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-slate-600 font-medium">
-                        {card.label}
-                      </p>
-                    </>
-                  )}
+                        <p className="text-xs sm:text-sm text-slate-600 font-medium">
+                          {card.label}
+                        </p>
+                      </>
+                    )}
 
-                  {/* Icon Cards (Guarantee & Service) */}
-                  {(card.type === 'guarantee' || card.type === 'service') && (
-                    <>
-                      <card.icon
-                        className="w-8 h-8 sm:w-12 sm:h-12 text-[#004A99]"
-                        strokeWidth={1.5}
-                      />
-                      <p className="text-xs sm:text-sm text-slate-900 font-bold leading-tight">
-                        {card.title}
-                      </p>
-                    </>
-                  )}
+                    {/* Rating Card */}
+                    {card.type === 'rating' && (
+                      <>
+                        <div className="flex items-center gap-2">
+                          <p
+                            className={`text-3xl sm:text-5xl font-black ${card.color}`}
+                          >
+                            {card.number}
+                          </p>
+                          <span className="text-2xl sm:text-3xl">
+                            {card.icon}
+                          </span>
+                        </div>
+                        <p className="text-xs sm:text-sm text-slate-600 font-medium">
+                          {card.label}
+                        </p>
+                      </>
+                    )}
 
-                  {/* Subtle gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                    {/* Icon Cards (Guarantee & Service) */}
+                    {(card.type === 'guarantee' || card.type === 'service') && (
+                      <>
+                        <card.icon
+                          className="w-8 h-8 sm:w-12 sm:h-12 text-[#004A99]"
+                          strokeWidth={1.5}
+                        />
+                        <p className="text-xs sm:text-sm text-slate-900 font-bold leading-tight">
+                          {card.title}
+                        </p>
+                      </>
+                    )}
+
+                    {/* Subtle gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
 
           {/* Mobile Buttons (Visible only on mobile, after Grid) */}
           <div className="lg:hidden w-full">
