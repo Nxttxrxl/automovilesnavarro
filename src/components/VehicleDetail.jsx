@@ -61,9 +61,12 @@ export default function VehicleDetail({ slug }) {
     return null; // Will redirect via useEffect
   }
 
-  // Generate WhatsApp message
-  const whatsappMessage = `Hola, me interesa el ${car.marca} ${car.modelo} con referencia ${car.id} que he visto en la web.`;
-  const whatsappLink = `https://wa.me/34683646930?text=${encodeURIComponent(whatsappMessage)}`;
+  // Generate WhatsApp links
+  const contactMessage = `Hola, estoy interesado en el ${car.marca} ${car.modelo} de ${car.year || ''} que he visto en vuestra web.`;
+  const contactLink = `https://wa.me/34683646930?text=${encodeURIComponent(contactMessage)}`;
+
+  const reservaMessage = `Hola! Me gustaría reservar el ${car.marca} ${car.modelo} que he visto en vuestra web.`;
+  const reservaLink = `https://wa.me/34683646930?text=${encodeURIComponent(reservaMessage)}`;
 
   // Format price
   const formatPrice = (price) => {
@@ -75,6 +78,53 @@ export default function VehicleDetail({ slug }) {
   const pageTitle = `${car.marca} ${car.modelo}${car.year ? ` ${car.year}` : ''} en Tarragona | Automóviles Navarro`;
   const pageDescription = `${car.marca} ${car.modelo}${car.year ? ` del ${car.year}` : ''} con ${car.km?.toLocaleString('es-ES') || 0} km. ${formatPrice(car.precio)}. Revisado y con garantía de 12 meses en Automóviles Navarro.`;
 
+  // JSON-LD Structured Data for SEO - Exhaustive Version
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Car',
+    name: `${car.marca} ${car.modelo} ${car.version || ''}`,
+    brand: {
+      '@type': 'Brand',
+      name: car.marca,
+    },
+    model: car.modelo,
+    vehicleModelDate: car.year,
+    vehicleConfiguration: car.version,
+    mileageFromOdometer: {
+      '@type': 'QuantitativeValue',
+      value: car.km,
+      unitCode: 'KMT',
+    },
+    fuelType: car.combustible,
+    vehicleEngine: {
+      '@type': 'EngineSpecification',
+      name: car.motor || 'N/A',
+      enginePower: {
+        '@type': 'QuantitativeValue',
+        value: car.cv,
+        unitText: 'CV',
+      },
+    },
+    vehicleTransmission: car.transmision || 'Manual',
+    description: car.descripcion || pageDescription,
+    image: car.imagen
+      ? `https://abvcgcemjxbfeibmtsxp.supabase.co/storage/v1/object/public/coches/${car.imagen}`
+      : null,
+    offers: {
+      '@type': 'Offer',
+      price: car.precio,
+      priceCurrency: 'EUR',
+      availability:
+        car.estado === 'Activo'
+          ? 'https://schema.org/InStock'
+          : 'https://schema.org/OutOfStock',
+      url:
+        typeof window !== 'undefined'
+          ? window.location.href
+          : `https://automovilesnavarro.com/catalogo/${slug}`,
+    },
+  };
+
   // Get environmental label
   const labelOption = LABEL_OPTIONS.find((opt) => opt.value === car.etiqueta);
 
@@ -83,6 +133,12 @@ export default function VehicleDetail({ slug }) {
 
   return (
     <div className="min-h-screen bg-slate-50 pt-20">
+      {/* Schema.org JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Breadcrumb */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -384,28 +440,42 @@ export default function VehicleDetail({ slug }) {
             </div>
 
             {/* CTA Buttons */}
-            <div className="space-y-4">
+            <div className="flex flex-col gap-3">
               <a
-                href={whatsappLink}
+                href={contactLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-green-600 hover:bg-green-700 text-white font-bold font-satoshi tracking-wide py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md"
+                className="w-full bg-primary hover:bg-primary-hover text-white font-bold font-satoshi tracking-wide py-4 px-6 rounded-xl flex items-center justify-center gap-3 transition-all shadow-sm hover:shadow-md active:scale-[0.98]"
               >
-                <span className="material-symbols-outlined text-[20px]">
-                  bookmark
+                <span className="material-symbols-outlined text-[22px]">
+                  chat
                 </span>
-                <span>Reservar</span>
+                <span>Contactar</span>
               </a>
 
-              <a
-                href="/catalogo"
-                className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold font-satoshi py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
-              >
-                <span className="material-symbols-outlined text-[20px]">
-                  arrow_back
-                </span>
-                <span>Volver al catálogo</span>
-              </a>
+              <div className="grid grid-cols-2 gap-3">
+                <a
+                  href={reservaLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-green-600 hover:bg-green-700 text-white font-bold font-satoshi py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow-md active:scale-[0.98]"
+                >
+                  <span className="material-symbols-outlined text-[20px]">
+                    bookmark
+                  </span>
+                  <span>Reservar</span>
+                </a>
+
+                <a
+                  href="/catalogo"
+                  className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold font-satoshi py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+                >
+                  <span className="material-symbols-outlined text-[20px]">
+                    arrow_back
+                  </span>
+                  <span>Volver</span>
+                </a>
+              </div>
             </div>
 
             {/* Finance Calculator */}

@@ -13,10 +13,12 @@ interface Props {
 
 const { 
   title = "Automóviles Navarro | Venta de Vehículos de Ocasión",
-  description = "Tu concesionario de confianza en Tarragona para vehículos de ocasión seleccionados. 20 años de experiencia.",
+  description = "Automóviles Navarro (también conocido como Navarro Automoción o Automoción Navarro) es tu concesionario de confianza en Tarragona. Vehículos de ocasión seleccionados con 20 años de experiencia.",
   image = "/logo_navarro_rect.png"
 } = Astro.props;
 
+const keywords = "Automóviles Navarro, Navarro Automoción, Automoción Navarro, compraventa coches Tarragona, vehículos ocasión Tarragona, coches segunda mano Tarragona";
+const canonicalURL = new URL(Astro.url.pathname, Astro.url);
 const pathname = Astro.url.pathname;
 ---
 
@@ -27,14 +29,17 @@ const pathname = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
     
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {image && <meta property="og:image" content={new URL(image, Astro.url)} />}
     <meta property="og:type" content="website" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- Favicons -->
+    {/* Favicons */}
     <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: dark)" />
     <link rel="manifest" href="/favicon/site.webmanifest?v=2" />
@@ -45,8 +50,8 @@ const pathname = Astro.url.pathname;
       <main class="flex-grow">
         <slot />
       </main>
-      <Footer client:load />
+      <Footer client:visible />
     </div>
-    <FloatingWhatsApp client:load />
+    <FloatingWhatsApp client:visible />
   </body>
 </html>

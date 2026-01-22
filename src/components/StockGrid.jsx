@@ -58,8 +58,23 @@ export default function StockGrid() {
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
   const [sortOption, setSortOption] = useState('destacados'); // Sort option
   const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [isMobile, setIsMobile] = useState(false);
 
-  const itemsPerPage = viewMode === 'grid' ? 10 : 20; // 10 in grid (quadricula), 20 in list (lista)
+  // Detect mobile for items per page adjustment
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const itemsPerPage = isMobile
+    ? viewMode === 'grid'
+      ? 6
+      : 8
+    : viewMode === 'grid'
+      ? 12
+      : 20;
 
   // Filter states with range sliders
   const [marcaSeleccionada, setMarcaSeleccionada] = useState('');
@@ -261,6 +276,8 @@ export default function StockGrid() {
     combustibleSeleccionado,
     etiquetaSeleccionada,
     sortOption,
+    viewMode,
+    isMobile,
   ]);
 
   const resetFilters = () => {
