@@ -62,7 +62,7 @@ export default function FinanceCalculator({ car }) {
         <span className="material-symbols-outlined text-primary text-3xl">
           calculate
         </span>
-        <h3 className="text-2xl font-bold text-slate-900">
+        <h3 className="text-xl font-bold text-slate-800">
           Calculadora de Financiación
         </h3>
       </div>
@@ -70,7 +70,7 @@ export default function FinanceCalculator({ car }) {
       {/* Entrada Inicial */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-3">
-          <label className="text-sm font-semibold text-slate-700">
+          <label className="text-[12px] font-black font-satoshi text-slate-500 uppercase tracking-[0.15em]">
             Entrada Inicial
           </label>
           <span className="text-2xl font-bold text-primary">
@@ -105,7 +105,7 @@ export default function FinanceCalculator({ car }) {
 
       {/* Plazo */}
       <div className="mb-8">
-        <label className="block text-sm font-semibold text-slate-700 mb-3">
+        <label className="block text-[12px] font-black font-satoshi text-slate-500 mb-3 uppercase tracking-[0.15em]">
           Plazo de Financiación
         </label>
         <div className="grid grid-cols-5 gap-2">

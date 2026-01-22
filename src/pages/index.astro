@@ -3,10 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Testimonials from '../components/Testimonials';
-import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
 
-const allTestimonials = await getCollection('testimonials');
-const testimonialsData = allTestimonials[0].data; // Sacamos los datos del archivo reviews.json
+const entry = await getEntry('testimonials', 'reviews');
+const testimonialsData = entry ? entry.data : [];
 ---
 
 <BaseLayout>

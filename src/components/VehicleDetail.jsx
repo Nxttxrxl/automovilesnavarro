@@ -214,18 +214,6 @@ export default function VehicleDetail({ slug }) {
                     </span>
                   </div>
                 )}
-
-                {/* Environmental Badge Overlay */}
-                {labelOption?.image && (
-                  <div className="absolute bottom-4 left-4">
-                    <img
-                      src={labelOption.image}
-                      alt={`Etiqueta ${car.etiqueta}`}
-                      className="h-12 w-auto drop-shadow-lg"
-                      title={labelOption.label}
-                    />
-                  </div>
-                )}
               </div>
 
               {/* Thumbnails */}
@@ -254,7 +242,7 @@ export default function VehicleDetail({ slug }) {
 
             {/* Technical Grid (Moved here) */}
             <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-              <h2 className="text-sm font-bold font-satoshi text-slate-900 mb-4 uppercase tracking-wide">
+              <h2 className="text-[12px] font-black font-satoshi text-slate-500 mb-4 uppercase tracking-[0.15em]">
                 Especificaciones
               </h2>
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
@@ -263,11 +251,11 @@ export default function VehicleDetail({ slug }) {
                   <span className="material-symbols-outlined text-primary text-2xl">
                     engineering
                   </span>
-                  <div>
-                    <div className="text-xs font-geist text-slate-500">
+                  <div className="flex flex-col">
+                    <div className="text-[14px] font-bold font-geist text-slate-700 leading-tight">
                       Motor
                     </div>
-                    <div className="font-bold font-satoshi text-slate-900">
+                    <div className="text-[12px] font-medium font-satoshi text-slate-900">
                       {car.motor || 'N/A'}
                     </div>
                   </div>
@@ -278,11 +266,11 @@ export default function VehicleDetail({ slug }) {
                   <span className="material-symbols-outlined text-primary text-2xl">
                     local_gas_station
                   </span>
-                  <div>
-                    <div className="text-xs font-geist text-slate-500">
+                  <div className="flex flex-col">
+                    <div className="text-[14px] font-bold font-geist text-slate-700 leading-tight">
                       Combustible
                     </div>
-                    <div className="font-bold font-satoshi text-slate-900">
+                    <div className="text-[12px] font-medium font-satoshi text-slate-900">
                       {car.combustible || 'N/A'}
                     </div>
                   </div>
@@ -293,11 +281,11 @@ export default function VehicleDetail({ slug }) {
                   <span className="material-symbols-outlined text-primary text-2xl">
                     speed
                   </span>
-                  <div>
-                    <div className="text-xs font-geist text-slate-500">
+                  <div className="flex flex-col">
+                    <div className="text-[14px] font-bold font-geist text-slate-700 leading-tight">
                       Potencia
                     </div>
-                    <div className="font-bold font-satoshi text-slate-900">
+                    <div className="text-[12px] font-medium font-satoshi text-slate-900">
                       {car.cv || 'N/A'} CV
                     </div>
                   </div>
@@ -308,11 +296,11 @@ export default function VehicleDetail({ slug }) {
                   <span className="material-symbols-outlined text-primary text-2xl">
                     settings_suggest
                   </span>
-                  <div>
-                    <div className="text-xs font-geist text-slate-500">
+                  <div className="flex flex-col">
+                    <div className="text-[14px] font-bold font-geist text-slate-700 leading-tight">
                       Transmisión
                     </div>
-                    <div className="font-bold font-satoshi text-slate-900">
+                    <div className="text-[12px] font-medium font-satoshi text-slate-900">
                       {car.transmision || 'Manual'}
                     </div>
                   </div>
@@ -323,11 +311,11 @@ export default function VehicleDetail({ slug }) {
                   <span className="material-symbols-outlined text-primary text-2xl">
                     add_road
                   </span>
-                  <div>
-                    <div className="text-xs font-geist text-slate-500">
+                  <div className="flex flex-col">
+                    <div className="text-[14px] font-bold font-geist text-slate-700 leading-tight">
                       Kilometraje
                     </div>
-                    <div className="font-bold font-satoshi text-slate-900">
+                    <div className="text-[12px] font-medium font-satoshi text-slate-900">
                       {car.km?.toLocaleString('es-ES') || 0} km
                     </div>
                   </div>
@@ -338,11 +326,11 @@ export default function VehicleDetail({ slug }) {
                   <span className="material-symbols-outlined text-primary text-2xl">
                     eco
                   </span>
-                  <div>
-                    <div className="text-xs font-geist text-slate-500">
+                  <div className="flex flex-col">
+                    <div className="text-[14px] font-bold font-geist text-slate-700 leading-tight">
                       Etiqueta
                     </div>
-                    <div className="font-bold font-satoshi text-slate-900">
+                    <div className="text-[12px] font-medium font-satoshi text-slate-900">
                       {car.etiqueta || 'Sin Etiqueta'}
                     </div>
                   </div>
@@ -353,7 +341,7 @@ export default function VehicleDetail({ slug }) {
             {/* Description Section */}
             {car.descripcion && (
               <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
-                <h2 className="text-sm font-bold font-satoshi text-slate-900 mb-4 uppercase tracking-wide flex items-center gap-2">
+                <h2 className="text-[12px] font-black font-satoshi text-slate-500 mb-4 uppercase tracking-[0.15em] flex items-center gap-2">
                   <span className="material-symbols-outlined text-primary text-xl">
                     description
                   </span>
@@ -390,7 +378,7 @@ export default function VehicleDetail({ slug }) {
 
             {/* Compromiso Navarro Section (Moved here) */}
             <div className="bg-gradient-to-br from-blue-50 to-slate-50 rounded-xl p-6 border border-blue-100 shadow-sm">
-              <h2 className="text-sm font-bold font-satoshi text-slate-900 mb-4 flex items-center gap-2 uppercase tracking-wide">
+              <h2 className="text-[12px] font-black font-satoshi text-slate-500 mb-4 flex items-center gap-2 uppercase tracking-[0.15em]">
                 <span className="material-symbols-outlined text-primary text-xl">
                   verified
                 </span>

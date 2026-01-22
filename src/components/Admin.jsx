@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { supabase } from '../lib/supabaseClient';
 
 // Utility function to sanitize filenames
@@ -99,6 +99,12 @@ export default function Admin() {
   const [cars, setCars] = useState([]);
   const [loadingCars, setLoadingCars] = useState(true);
   const [editingCar, setEditingCar] = useState(null);
+
+  // Derived state for brand suggestions
+  const uniqueBrands = useMemo(() => {
+    const brands = [...new Set(cars.map((car) => car.marca))];
+    return brands.filter(Boolean).sort();
+  }, [cars]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -229,11 +235,13 @@ export default function Admin() {
         finalImageName = webpFullName;
       }
 
-      // 3. Prepare car data
+      // 3. Prepare car data with normalization
+      const normalizedMarca = formData.marca.trim();
       const carData = {
-        matricula: formData.matricula || null,
-        marca: formData.marca,
-        modelo: formData.modelo,
+        destacado: formData.destacado === true || formData.destacado === 'true',
+        matricula: formData.matricula?.trim() || null,
+        marca: normalizedMarca,
+        modelo: formData.modelo.trim(),
         version: formData.version || null,
         precio: formData.precio ? parseInt(formData.precio) : null,
         year: formData.year ? parseInt(formData.year) : null,
@@ -466,6 +474,33 @@ export default function Admin() {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Destacado */}
+              <div className="flex items-center gap-3 md:col-span-2 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
+                <input
+                  type="checkbox"
+                  id="destacado"
+                  name="destacado"
+                  checked={formData.destacado}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      destacado: e.target.checked,
+                    }))
+                  }
+                  className="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-600 transition-all cursor-pointer"
+                />
+                <label
+                  htmlFor="destacado"
+                  className="text-sm font-bold font-satoshi text-slate-900 cursor-pointer flex items-center gap-2"
+                >
+                  <span className="material-symbols-outlined text-blue-600 text-[20px]">
+                    star
+                  </span>
+                  Marcar como Vehículo Destacado (Aparecerá primero en el
+                  catálogo)
+                </label>
+              </div>
+
               {/* Matrícula */}
               <div>
                 <label
@@ -497,12 +532,18 @@ export default function Admin() {
                   type="text"
                   id="marca"
                   name="marca"
+                  list="brands-list"
                   value={formData.marca}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all outline-none font-geist"
                   placeholder="Ej: Audi"
                   required
                 />
+                <datalist id="brands-list">
+                  {uniqueBrands.map((brand) => (
+                    <option key={brand} value={brand} />
+                  ))}
+                </datalist>
               </div>
 
               {/* Modelo */}
@@ -639,7 +680,7 @@ export default function Admin() {
                 >
                   <option value="">Seleccionar...</option>
                   <option value="Gasolina">Gasolina</option>
-                  <option value="Diesel">Diesel</option>
+                  <option value="Diésel">Diésel</option>
                   <option value="Híbrido">Híbrido</option>
                   <option value="Eléctrico">Eléctrico</option>
                 </select>
@@ -763,7 +804,6 @@ export default function Admin() {
                   <option value="Automático">Automático</option>
                 </select>
               </div>
-
               {/* Destacado */}
               <div className="flex items-center gap-3 md:col-span-2 bg-blue-50/50 p-4 rounded-xl border border-blue-100">
                 <input

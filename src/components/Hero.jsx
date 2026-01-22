@@ -160,7 +160,7 @@ export default function Hero() {
             >
               {card.number}
             </p>
-            <p className="text-[10px] sm:text-xs font-bold text-slate-600 uppercase tracking-tight">
+            <p className="text-[10px] sm:text-xs font-extrabold text-slate-700 uppercase tracking-tight">
               {card.label}
             </p>
           </>
@@ -177,7 +177,7 @@ export default function Hero() {
               </p>
               <span className="text-xl sm:text-2xl">{card.icon}</span>
             </div>
-            <p className="text-[10px] sm:text-xs font-bold text-slate-600 uppercase tracking-tight">
+            <p className="text-[10px] sm:text-xs font-extrabold text-slate-700 uppercase tracking-tight">
               {card.label}
             </p>
           </>

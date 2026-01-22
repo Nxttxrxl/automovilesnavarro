@@ -1,44 +1,31 @@
-/* Limit weights to 400, 700, 900 for faster loading */
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,400&display=swap');
-@import url('https://cdn.jsdelivr.net/npm/geist@1.1.0/dist/fonts/geist-sans/style.css');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 @import 'tailwindcss';
 
-/* Global Font Defaults */
-:root {
-  font-family: 'Satoshi', 'Inter', sans-serif;
-}
-
-body {
-  font-family: 'Satoshi', 'Inter', sans-serif;
-}
-
 /* Custom Theme Variables */
 @theme {
+  /* Tech Luxury Typography */
+  --font-heading: 'Outfit', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+
   /* Corporate Blue - Matches logo color */
   --color-primary: #004a99;
   --color-primary-hover: #003d7a;
   --color-primary-light: #0056b3;
 
-  --color-wallapop-teal: #13c1ac;
-  --color-wallapop-teal-dark: #11ae9a;
+  --color-brand-green: #10b981;
+  --color-brand-orange: #f59e0b;
+  --color-brand-red: #ef4444;
+
+  /* Utility Colors */
   --color-text-dark: #1f2937;
   --color-background-light: #ffffff;
   --color-background-dark: #0e172a;
   --color-surface-light: #f9fafb;
 
-  --font-satoshi: 'Satoshi', 'Inter', sans-serif;
-  --font-geist: 'Geist Sans', 'Inter', sans-serif;
-
-  --font-sans: 'Satoshi', 'Inter', sans-serif;
-  --font-display: 'Satoshi', 'Inter', sans-serif;
-  --font-body: 'Satoshi', 'Inter', sans-serif;
-  --font-data: 'Geist Sans', 'Inter', sans-serif;
-
   --radius-DEFAULT: 0.5rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
-  --radius-2xl: 1rem;
+  --radius-2xl: 1.1rem;
   --radius-full: 9999px;
 
   --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
@@ -46,12 +33,21 @@ body {
 }
 
 /* Base styles */
-body {
-  font-family: 'Satoshi', 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  opacity: 0;
-  animation: fadeIn 0.4s ease-out forwards;
+@layer base {
+  body {
+    @apply font-sans antialiased text-slate-800 bg-white;
+    opacity: 0;
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
 }
 
 @keyframes fadeIn {
@@ -101,13 +97,10 @@ body {
   100% {
     filter: brightness(1) saturate(1);
     transform: scale(1.05);
-    /* Slight zoom start */
   }
-
   50% {
     filter: brightness(1.3) saturate(1.3);
     transform: scale(1.1);
-    /* Breathe in */
   }
 }
 
